@@ -22,7 +22,6 @@ private:
         }
     }
 
-
     // fild the maximum in the given range [left, right]
     // time complaxity O(logn)
     int queryprocess(int node, int start, int end, int left, int right)
@@ -48,6 +47,26 @@ private:
             return max(leftValue, rightValue);
         }
     }
+    void updateprocess(int node, int start, int end, int pos, int value)
+    {
+        if (start == end)
+        {
+            tree[node] = value;
+        }
+        else
+        {
+            int mid = (start + end) / 2;
+            if (start <= pos && pos <= mid)
+            {
+                updateprocess(node * 2, start, mid, pos, value);
+            }
+            else
+            {
+                updateprocess(node * 2 + 1, mid + 1, end, pos, value);
+            }
+            tree[node] = max(tree[node * 2], tree[node * 2 + 1]);
+        }
+    }
 
 public:
     vector<int> tree;
@@ -59,14 +78,16 @@ public:
         n = arr.size();
         tree.resize(4 * n, INT_MIN);
         build(1, 0, n - 1, arr);
-       
     }
-
-
 
     int query(int left, int right)
     {
         return queryprocess(1, 0, n - 1, left, right);
+    }
+
+    void update(int pos, int value)
+    {
+        updateprocess(1, 0, n - 1, pos, value);
     }
 };
 int main()
