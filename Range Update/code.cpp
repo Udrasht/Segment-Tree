@@ -112,7 +112,7 @@ vector<string> querys={"Query", "update", "Query","Query","Query","update","Quer
         }
         else if(querys[i]=="update"){
             st.updateRange(queryvalue[i][0],queryvalue[i][1],queryvalue[i][2]);
-            cout<<"updated"<<endl;
+            cout<<" Updated"<<endl;
 
         }
 
