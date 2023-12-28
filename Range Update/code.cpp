@@ -50,18 +50,18 @@ private:
             int mid = (start + end) / 2;
             if (tree[node] != 0)
             {
-                tree[node * 2] =tree[node * 2] + tree[node];
-                tree[node * 2 + 1] =tree[node * 2 + 1]+ tree[node];
+                tree[node * 2] = tree[node * 2] + tree[node];
+                tree[node * 2 + 1] = tree[node * 2 + 1] + tree[node];
                 tree[node] = 0;
             }
 
             if (start <= index && index <= mid)
             {
-              return  processQuery(node * 2, start, mid, index);
+                return processQuery(node * 2, start, mid, index);
             }
             else
             {
-              return  processQuery(node * 2+1, mid + 1, end, index);
+                return processQuery(node * 2 + 1, mid + 1, end, index);
             }
         }
     }
@@ -76,11 +76,13 @@ public:
         build(1, 0, n - 1, arr);
         // printTree();
     }
-    void printTree(){
-        for(auto it: tree){
-            cout<<it<<" ";
+    void printTree()
+    {
+        for (auto it : tree)
+        {
+            cout << it << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
     void updateRange(int left, int right, int value)
     {
@@ -91,7 +93,6 @@ public:
     int Query(int index)
     {
         return processQuery(1, 0, n - 1, index);
-
     }
 };
 
@@ -100,23 +101,21 @@ int main()
     vector<int> arr;
     arr = {8, 7, 4, 2, 5, 3, 1, 10};
     // arr={8,7,4,2,5};
-vector<string> querys={"Query", "update", "Query","Query","Query","update","Query","Query","Query","Query","Query","Query"};
-    vector<vector<int>> queryvalue={{0}, {0,2,1}, {0},{1},{2},{2,5,-2},{1},{2},{3},{4},{5},{6}};
+    vector<string> querys = {"Query", "update", "Query", "Query", "Query", "update", "Query", "Query", "Query", "Query", "Query", "Query"};
+    vector<vector<int>> queryvalue = {{0}, {0, 2, 1}, {0}, {1}, {2}, {2, 5, -2}, {1}, {2}, {3}, {4}, {5}, {6}};
     SegmentTree st(arr);
-   
-    for(int i=0;i<querys.size();i++){
-        if(querys[i]=="Query"){
-             cout << " Value of index "<< queryvalue[i][0]<<"-> " << st.Query(queryvalue[i][0]) << endl;
-             
 
+    for (int i = 0; i < querys.size(); i++)
+    {
+        if (querys[i] == "Query")
+        {
+            cout << " Value of index " << queryvalue[i][0] << "-> " << st.Query(queryvalue[i][0]) << endl;
         }
-        else if(querys[i]=="update"){
-            st.updateRange(queryvalue[i][0],queryvalue[i][1],queryvalue[i][2]);
-            cout<<" Updated"<<endl;
-
+        else if (querys[i] == "update")
+        {
+            st.updateRange(queryvalue[i][0], queryvalue[i][1], queryvalue[i][2]);
+            cout << " Updated" << endl;
         }
-
-
     }
     return 0;
 }
