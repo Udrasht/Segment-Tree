@@ -16,6 +16,7 @@ private:
           int left= build(node * 2, start, mid, arr);
           int right= build(node * 2 + 1, mid + 1, end, arr);
             tree[node] = left+right;
+            return tree[node];
         }
     }
     void propogate(int node,int start,int end){
@@ -54,6 +55,7 @@ private:
             updateRangeProcess(node * 2, start, mid, left, right, value);
             updateRangeProcess(node * 2 + 1, mid + 1, end, left, right, value);
             tree[node]=tree[node*2]+tree[node*2+1];
+            
         }
     }
 
